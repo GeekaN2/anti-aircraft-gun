@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Anti-aircraft gun</title>
+</head>
+<body>
+    <h1 class="center">Anti-aircraft gun</h1>
+    <div id="app">
+        <div id="inputs">
+            <div class="param">
+                <h2>Масса {{ weight || '100'}} (г)</h2>
+                <input type="text" v-model="weight" placeholder="Масса">
+            </div>
+
+            <div class="param">
+                <h2>Высота {{ height || '10'}} (м)</h2>
+                <input type="text" v-model="height" placeholder="Высота">
+            </div>
+
+            <div class="param">
+                <h2>Ширина {{ width || '20'}} (м)</h2>
+                <input type="text" v-model="width" placeholder="Ширина">
+            </div>
+
+            <div class="param">
+                <h2>Скорость {{ speed || '10'}} (м/с)</h2>
+                <input type="text" v-model="speed" placeholder="Скорость">
+            </div>
+
+            <div class="param">
+                <h2>Угол 0 &lt; {{ tilt_angle || '30'}} &lt; 90 (град)</h2>
+                <input type="text" v-model="tilt_angle" placeholder="Угол">
+            </div>
+
+            <div class="param">
+                <h2>К-т сопротивления {{ resistance || '100'}}</h2>
+                <input type="text" v-model="resistance" placeholder="Коэффициент">
+            </div>
+
+            <div>
+                <input type="button" value="Draw" id="draw" v-on:click="draw">
+                <input type="button" value="Reset" id="reset" v-on:click="reset">
+            </div>
+
+            <h2 id="determine">Определить скорость и угол при k = 0, t > 0 (c)</h2>
+            <div class="param">
+                <h2>X цели {{ target_x || '10'}} (> 0)</h2>
+                <input type="text" v-model="target_x" placeholder="X цели">
+            </div>
+
+            <div class="param">
+                <h2>Y цели {{ target_y || '2'}} (> 0)</h2>
+                <input type="text" v-model="target_y" placeholder="Y цели">
+            </div>
+
+            <div class="param">
+                <h2>Время полёта {{ target_time || '1'}} (с)</h2>
+                <input type="text" v-model="target_time" placeholder="Время полёта">
+            </div>
+
+            <input type="button" value="Calculate" id="calculate" v-on:click="calculate">
+        </div>
+        
+    </div>
+    <canvas id="canvas" width="700px" height="350px"></canvas>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html> 

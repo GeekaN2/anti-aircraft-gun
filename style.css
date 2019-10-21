@@ -1,0 +1,80 @@
+@import "reset.css";
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    color: #3b3b3b;
+}
+
+input {
+    border: 3px solid rgb(211, 96, 76);
+    padding: 0.3rem;
+    width: 100%;
+}
+
+canvas {
+    position: fixed;
+    display: block;
+    width: 700px;
+    right: 1rem;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+h1 {
+    margin: 1rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.param {
+    margin-bottom: 1rem;
+}
+
+#app {
+    padding: 1rem;
+    display: block;
+    float: left;
+    overflow: hidden;
+}
+
+#inputs {
+    width: 300px;
+    margin: 0 auto;
+}
+
+#draw, #calculate {
+    background: #fff;
+    border-color: #006f00;
+    color: #006f00;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+#reset {
+    background: #fff;
+    border-color: #a90101;
+    color: #a90101;
+    width: 100%;;
+}
+
+#draw, #reset, #calculate {
+    transition: 0.125s;
+    width: calc(306px + 0.5rem)
+}
+
+#draw:hover, #reset:hover {
+    opacity: 0.6;
+}
+
+#draw:active, #reset:active {
+    border-color: #2a2a2a;
+    color: #2a2a2a;
+}
+
+#determine {
+    margin: 1rem 0 0.5rem 0;
+    color: #000;
+}
