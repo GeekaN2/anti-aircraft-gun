@@ -27,7 +27,7 @@
             </div>
 
             <div class="param">
-                <h2>Скорость {{ speed || '10'}} (м/с)</h2>
+                <h2>Скорость {{ speed || '30'}} (м/с)</h2>
                 <input type="text" v-model="speed" placeholder="Скорость">
             </div>
 
@@ -62,9 +62,10 @@
                 <input type="text" v-model="target_time" placeholder="Время полёта">
             </div>
 
+
+            <div id="err">{{ max_err * 100 }}% </div>
             <input type="button" value="Calculate" id="calculate" v-on:click="calculate">
         </div>
-        
     </div>
     <canvas id="canvas" width="700px" height="350px"></canvas>
 

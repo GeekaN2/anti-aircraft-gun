@@ -3,31 +3,32 @@ window.onload = function () {
     const widthpx = 700;
     const heightpx = 350;
     const g = 9.78;
+    const eps = 0.1;
 
 
 
     var gun = {
-        a_cos: null,
+        a_cos: null, // deg
         a_sin: null,
-        ux: [],
+        ux: [], // m/s
         uy: [],
         x: [0], // meters
         y: [0]
     }
 
-
+    /**
+     * Calculate next position in realtime mode with static dt
+     */
     function nextPos() {
         let ux = gun.ux[gun.ux.length - 1],
             uy = gun.uy[gun.uy.length - 1],
             x = gun.x[gun.x.length - 1],
             y = gun.y[gun.y.length - 1];
 
-        gun.ux.push(ux - (app.resistance * ux / app.weight) * dt);
-        gun.uy.push(uy - (g + app.resistance * uy / app.weight) * dt);
+        gun.ux.push(ux - (app.resistance * ux * ux / app.weight) * dt);
+        gun.uy.push(uy - (g + app.resistance * uy * uy / app.weight) * dt);
         gun.x.push(x + ux * dt);
         gun.y.push(y + uy * dt);
-        if (gun.x[gun.x.length - 1] > app.target_x || gun.y[gun.y.length - 1] > app.target_y) { }
-        // console.log(gun.x[gun.x.length - 1], gun.y[gun.y.length - 1]);
     }
 
 
@@ -36,7 +37,7 @@ window.onload = function () {
             y1 = heightpx - gun.y[gun.y.length - 2] / app.height * heightpx,
             x2 = gun.x[gun.x.length - 1] / app.width * widthpx,
             y2 = heightpx - gun.y[gun.y.length - 1] / app.height * heightpx;
-
+        
         var canvas = document.querySelector("#canvas");
         const ctx = canvas.getContext("2d");
         ctx.beginPath();
@@ -71,7 +72,7 @@ window.onload = function () {
         data: {
             height: 5,
             width: 10,
-            speed: 10,
+            speed: 30,
             tilt_angle: 30,
             resistance: 100,
             weight: 100,
@@ -91,7 +92,7 @@ window.onload = function () {
                     ux: [this.speed * a_cos],
                     uy: [this.speed * a_sin],
                     x: [0],
-                    y: [0]
+                    y: [0],
                 }
 
                 var drawing = setInterval(function () {
@@ -102,6 +103,7 @@ window.onload = function () {
                         clearInterval(drawing);
                     }
                 }, 2);
+
             },
             calculate: function () {
                 this.resistance = 0;
