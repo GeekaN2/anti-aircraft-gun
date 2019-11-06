@@ -1,5 +1,5 @@
 window.onload = function () {
-    const dt = 0.002; // s
+    const dt = 0.005; // s
     const widthpx = 700;
     const heightpx = 350;
     const g = 9.78;
@@ -102,7 +102,7 @@ window.onload = function () {
                     } else {
                         clearInterval(drawing);
                     }
-                }, 2);
+                }, dt * 1000);
 
             },
             calculate: function () {

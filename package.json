@@ -1,0 +1,10 @@
+{
+  "name": "anti-aircraft-gun",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "GeekaN",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
