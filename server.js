@@ -4,13 +4,14 @@ var app = express();
 
 app.use(express.static('./static')); //This ensures local references to cs and js files work
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/static/index.html');
+
+
+app.get('/anti-aircraft-gun', (req, res) => {
+  res.sendFile(__dirname + '/static/anti-aircraft-gun/index.html');
 });
 
-
-app.get('/', function (req, res) {
-  res.render('index');
+app.get('/heat-ditribution-in-the-road', function (req, res) {
+  res.sendFile(__dirname + '/static/heat-ditribution-in-the-road/index.html');
 });
 
 app.listen(3000, function () {

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>heat-distribution</title>
+</head>
+<body>
+    <h2>Heat distribution</h2>
+    <canvas id="canvas"></canvas>
+    <script>
+        /**
+         * Constants. TODO custom input
+         */
+        const dt = 1.6;
+        const dx = 1;
+        const a = 0.5;
+        const len = 4; // rod length
+        const lengthIntervals = 5;
+        const timeIntervals = 20;
+        const canvas = document.querySelector('#canvas');
+        
+        /**
+          * Get temperature on the x-coordinate.
+          * Also uses to get temperature at the zero layer
+          * @return {number} temperature
+          */
+        function getTemperatureAtTheEnds(x, points){
+            return -0.5 * x ** 2 + 2 * x + 3;
+        }
+
+        /**
+         * @return {number} temperature 
+         */
+        function getTemperature(t, x, points) {
+            return points[t - 1][x] + 
+            (a ** 2 * dt / (dx ** 2)) * 
+            (points[t - 1][x + 1] - 2 * points[t - 1][x] + points[t - 1][x - 1]);
+        }
+
+        /**
+         * @return {object} addiction for every timeInterval
+         * matrix timeIntervals * len
+         */
+        function calculateTemperature(){
+            let points = []; 
+
+            for (let t = 0; t < timeIntervals; t++){
+                points[t] = [];
+
+                for (let x = 0; x < lengthIntervals; x++)
+                    if (t == 0 || x == 0 || x == lengthIntervals - 1)
+                        points[t][x] = getTemperatureAtTheEnds(x * dx, points);
+                    else 
+                        points[t][x] = getTemperature(t, x, points);
+            }
+            console.log(typeof(points));
+            return points;
+        }
+
+        const points = calculateTemperature();
+        
+        function draw(canvas) {
+
+        }
+
+         
+    </script>
+</body>
+</html>
