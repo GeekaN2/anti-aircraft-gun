@@ -1,9 +1,10 @@
-@import "reset.css";
+@import "../reset.css";
+@import "../main.css";
 
 body {
-    font-family: Arial, sans-serif;
-    font-size: 22px;
-    color: #3b3b3b;
+    font-family: var(--main-font);
+    font-size: 13px;
+    color: var(--black);
 }
 
 input {
@@ -22,6 +23,7 @@ canvas {
 }
 
 h1 {
+    font-size: 1.8rem;
     margin: 1rem;
 }
 
@@ -31,6 +33,10 @@ h1 {
 
 .param {
     margin-bottom: 1rem;
+}
+
+.param h2 {
+    font-size: 1.3rem;
 }
 
 #app {

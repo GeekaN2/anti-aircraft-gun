@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>heat-distribution</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Heat distribution</h2>
-    <canvas id="canvas"></canvas>
+    <h2 class="title-name">Heat distribution</h2>
+    
+    <canvas id="canvas" width="800px" height="400px"></canvas>
     <script>
         /**
          * Constants. TODO custom input
@@ -59,12 +61,56 @@
             return points;
         }
 
-        const points = calculateTemperature();
-        
-        function draw(canvas) {
-
+        function round(number, decimalPlaces = 3){
+            return ~~(number * 10 ** decimalPlaces) / (10 ** decimalPlaces);
         }
 
+        function drawGrid(canvas, widthpx, heightpx, physicalWidth, physicalHeight, xLines, yLines) {
+            const ctx = canvas.getContext("2d");
+
+            ctx.clearRect(0, 0, widthpx, heightpx);
+            ctx.font = "12px sans-serif";
+
+            for (let i = 1; i < yLines; i++){
+                ctx.fillRect(0, heightpx * i / yLines, widthpx, 1);
+                ctx.fillText(round(physicalHeight - physicalHeight * i / yLines).toString(), 3, heightpx*i/yLines -3);
+            }
+            for (let i = 1; i < xLines; i++){
+                ctx.fillRect(widthpx * i / xLines, 0, 1, heightpx);
+                ctx.fillText(round(physicalWidth * i / xLines).toString(), widthpx * i / xLines + 3, heightpx - 3);
+            }
+            
+        }
+
+        function draw(canvas, coordinates, widthpx, heightpx, physicalWidth, physicalHeight) {
+            const ctx = canvas.getContext("2d");
+
+            for (let i = 0; i < coordinates.x.length - 1; i++){
+                let x1 = coordinates.x[i] / physicalWidth * widthpx;
+                let y1 = heightpx - coordinates.y[i] / physicalHeight * heightpx;
+                let x2 = coordinates.x[i + 1] / physicalWidth * widthpx;
+                let y2 = heightpx - coordinates.y[i + 1] / physicalHeight * heightpx;
+
+                ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                ctx.closePath();
+                ctx.stroke();
+            }
+        }
+
+
+        const points = calculateTemperature();
+
+        drawGrid(canvas, 800, 400, 4, 9, 4, 3);
+        
+        for (let i = 0; i < timeIntervals; i++)
+            draw(canvas,  {
+                x : Array(...Array(lengthIntervals)).map((_, i) => i * dx),
+                y : points[i],
+            },
+            800, 400, 4, 9);
+       
          
     </script>
 </body>

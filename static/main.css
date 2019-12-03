@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap&subset=cyrillic');
+
+:root {
+    --main-color: #084f93;
+    --side-color: #878581;
+    --grey: #878581;
+    --orange: #d88144;
+    --yellow: #ffc357;
+    --black: #07080a; 
+    --main-font: 'Nunito', sans-serif;
+}
