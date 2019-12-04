@@ -1,9 +1,23 @@
-# Anti-aircraft gun
+# Physics projects
 
 Download repository
 
-Open `index.html` in browser
+Install packages
+```
+yarn install
+```
+
+
+Run nodemon
+```
+nodemon server.js
+```
+
+check localhost
+```
+http://localohost:3000
+```
 
 Choose any parameters and check the schedule.
 
-### [Отчёт](REPORT.md)
+### [Отчёт anti-aircraft-gun](REPORT.md)
