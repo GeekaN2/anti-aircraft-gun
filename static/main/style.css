@@ -10,6 +10,7 @@ body {
     color: var(--black);
     font-family: var(--main-font);
     line-height: 1.2;
+    outline: none;
 }
 
 

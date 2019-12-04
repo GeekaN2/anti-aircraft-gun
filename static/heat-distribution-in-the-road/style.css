@@ -1,5 +1,6 @@
 @import "../reset.css";
 @import "../main.css";
+@import "../all.min.css";
 
 body {
     font-family: var(--main-font);
@@ -13,8 +14,69 @@ body {
     margin: 1rem 0;
 }
 
-#canvas {
+.actions-buttons {
+    display: flex;
+    position: absolute;
+    left: 10px;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    font-size: 1.7rem;
+    color: var(--main-color);
+    margin-right: 1.2rem;
+    height: 1.8rem;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.action-button:hover {
+    color: var(--side-color);
+}
+
+.canvas {
     display: block;
     border: 1px solid #000;
     margin: 0 auto;
+}
+
+
+.variables {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 20px auto;
+    flex-wrap: wrap;
+}
+
+.variable {
+    min-width: 200px;
+    margin: 10px;
+}
+
+.variable-title {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.variable-value {
+    display: block;
+    margin: 0 auto;
+    padding: 0.2rem;
+    font-size: 1.1rem;
+    outline: none;
+    border: 2px solid;
+    text-align: center;
+    padding: 0.2rem;
+    border-image: linear-gradient(to top, var(--main-color), #0000 90%) 1 round;
+    transition: 0.2s;
+}
+
+.variable-value:focus {
+    border-image: linear-gradient(to top, var(--side-color), #0000 90%) 1 round;
+}
+
+.designation {
+    color: var(--orange);
 }
