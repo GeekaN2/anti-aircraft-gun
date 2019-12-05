@@ -45,3 +45,6 @@ function getTemperature(t, x, points) {
 ```js
 draw(...args)
 ```
+
+
+![Graphic 1](heat-distribution-in-the-rod/images/graphic1.png)
