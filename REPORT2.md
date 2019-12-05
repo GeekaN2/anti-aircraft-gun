@@ -47,4 +47,4 @@ draw(...args)
 ```
 
 
-![Graphic 1](heat-distribution-in-the-rod/images/graphic1.png)
+![Graphic 1](static/heat-distribution-in-the-rod/images/graphic1.png)
