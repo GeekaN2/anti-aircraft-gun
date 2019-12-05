@@ -66,15 +66,15 @@ body {
     padding: 0.2rem;
     font-size: 1.1rem;
     outline: none;
-    border: 2px solid;
     text-align: center;
     padding: 0.2rem;
-    border-image: linear-gradient(to top, var(--main-color), #0000 90%) 1 round;
+    border: 2px solid var(--main-color);
+    border-top: none;
     transition: 0.2s;
 }
 
 .variable-value:focus {
-    border-image: linear-gradient(to top, var(--side-color), #0000 90%) 1 round;
+    border-color: var(--side-color);
 }
 
 .designation {
