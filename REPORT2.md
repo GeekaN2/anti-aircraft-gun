@@ -18,11 +18,12 @@ const timeIntervals = 20; // количество интервалов врем�
  * Get temperature on the x-coordinate.
  * Also uses to get temperature at the zero layer
  * @param {number} x - position on the rod
- * @param {array[]} points - array of all prev points
  * @return {number} temperature
  */
-function getTemperatureAtTheEnds(x, points){
-    return -0.5 * x ** 2 + 2 * x + 3;
+function getTemperatureAtTheEnds(x){
+    if (x == 0) return 3;
+    if (x == len) return 1;
+    return Math.sin(x);
 }
 ```
 
@@ -31,8 +32,8 @@ function getTemperatureAtTheEnds(x, points){
 /**
  * @param {number} t - time
  * @param {number} x - position on the rod
- * @param {array[]} - array of all prev points
- * @return {number} temperature 
+ * @param {array[]}points - array of all prev points
+ * @return {number} - temperature 
  */
 function getTemperature(t, x, points) {
     return points[t - 1][x] + 
@@ -48,3 +49,4 @@ draw(...args)
 
 
 ![Graphic 1](static/heat-distribution-in-the-rod/images/graphic1.png)
+![Graphic 2](static/heat-distribution-in-the-rod/images/graphic2.png)

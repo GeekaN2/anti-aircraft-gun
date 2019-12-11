@@ -20,7 +20,6 @@ function getTemperatureAtTheEnds(x){
     if (x == 0) return 3;
     if (x == len) return 1;
     return Math.sin(x);
-    //return -0.5 * x ** 2 + 2 * x + 3;
 }
 
 /**
@@ -60,7 +59,7 @@ function round(number, decimalPlaces = 3){
     return ~~(number * 10 ** decimalPlaces) / (10 ** decimalPlaces);
 }
 
-function drawGrid(canvas, widthpx, heightpx, physicalWidth, physicalHeight, xLines, yLines) {
+function drawGrid(canvas, widthpx, heightpx, physicalWidth, physicalHeight, xLines, yLines, negativeY) {
     const ctx = canvas.getContext("2d");
 
     ctx.clearRect(0, 0, widthpx, heightpx);
@@ -68,7 +67,7 @@ function drawGrid(canvas, widthpx, heightpx, physicalWidth, physicalHeight, xLin
 
     for (let i = 1; i < yLines; i++){
         ctx.fillRect(0, heightpx * i / yLines, widthpx, 1);
-        ctx.fillText(round(physicalHeight - physicalHeight * i / yLines).toString(), 3, heightpx*i/yLines -3);
+        ctx.fillText(round(physicalHeight - physicalHeight * i / yLines - negativeY).toString(), 3, heightpx*i/yLines - 3);
     }
     for (let i = 1; i < xLines; i++){
         ctx.fillRect(widthpx * i / xLines, 0, 1, heightpx);
@@ -77,8 +76,9 @@ function drawGrid(canvas, widthpx, heightpx, physicalWidth, physicalHeight, xLin
     
 }
 
-function draw(canvas, coordinates, widthpx, heightpx, physicalWidth, physicalHeight) {
+function draw(canvas, coordinates, widthpx, heightpx, physicalWidth, physicalHeight, negativeY) {
     const ctx = canvas.getContext("2d");
+    const unit = -negativeY * heightpx / physicalHeight;
 
     for (let i = 0; i < coordinates.x.length - 1; i++){
         let x1 = coordinates.x[i] / physicalWidth * widthpx;
@@ -87,10 +87,29 @@ function draw(canvas, coordinates, widthpx, heightpx, physicalWidth, physicalHei
         let y2 = heightpx - coordinates.y[i + 1] / physicalHeight * heightpx;
 
         ctx.beginPath();
-            ctx.moveTo(x1, y1);
-            ctx.lineTo(x2, y2);
+            ctx.moveTo(x1, y1 - unit);
+            ctx.lineTo(x2, y2 - unit);
         ctx.closePath();
         ctx.stroke();
+    }
+}
+
+/**
+ * Get maximum and minimum in matrix
+ * @param {number[][]} a - matrix
+ * @return {object} -max and min elements
+ */
+function getMaxAndMin(a){
+    let mn = 1e9, mx = -1e9;
+    for (let i = 0; i < a.length; i++)
+        for (let j = 0; j < a[i].length; j++){
+            mx = a[i][j] > mx ? a[i][j] : mx;
+            mn = a[i][j] < mn ? a[i][j] : mn;
+        }
+
+    return {
+        min: Math.round(mn) - 1,
+        max: Math.round(mx) + 1
     }
 }
 
@@ -99,22 +118,23 @@ function draw(canvas, coordinates, widthpx, heightpx, physicalWidth, physicalHei
  */
 function main(){
     const points = calculateTemperature();
-    console.log(points);
 
     /**
      * width for mobile phones 
      */
     const actuallyWidth = Math.min(800, window.innerWidth);
+    const extremums = getMaxAndMin(points);
     canvas.width = actuallyWidth;
     canvas.height = actuallyWidth * 0.5;
-
-    drawGrid(canvas, actuallyWidth, actuallyWidth * 0.5, 8, 9, 4, 3);
+    
+    console.log(extremums);
+    drawGrid(canvas, actuallyWidth, actuallyWidth * 0.5, len, extremums.max, 4, 3, -1);
 
     for (let i = 0; i < timeIntervals; i++)
         draw(canvas,  {
             x : Array(...Array(lengthIntervals + 1)).map((_, i) => i * dx),
             y : points[i],
         },
-        actuallyWidth, actuallyWidth * 0.5, 8, 9);
+        actuallyWidth, actuallyWidth * 0.5, len, extremums.max, -1);
 }
 window.onload = main;
