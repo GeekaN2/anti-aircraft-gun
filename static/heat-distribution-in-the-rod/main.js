@@ -49,8 +49,6 @@ function calculateTemperature(){
                 points[t][x] = getTemperatureAtTheEnds(x * dx);
             else
                 points[t][x] = getTemperature(t, x, points);
-        
-        console.log(points[t]);
     }
     return points;
 }
@@ -127,7 +125,6 @@ function main(){
     canvas.width = actuallyWidth;
     canvas.height = actuallyWidth * 0.5;
     
-    console.log(extremums);
     drawGrid(canvas, actuallyWidth, actuallyWidth * 0.5, len, extremums.max, 4, 3, -1);
 
     for (let i = 0; i < timeIntervals; i++)
