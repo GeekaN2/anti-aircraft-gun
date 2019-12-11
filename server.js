@@ -10,8 +10,8 @@ app.get('/anti-aircraft-gun', (req, res) => {
   res.sendFile(__dirname + '/static/anti-aircraft-gun/index.html');
 });
 
-app.get('/heat-ditribution-in-the-road', function (req, res) {
-  res.sendFile(__dirname + '/static/heat-ditribution-in-the-road/index.html');
+app.get('/heat-distribution-in-the-rod', function (req, res) {
+  res.sendFile(__dirname + '/static/heat-distribution-in-the-rod/index.html');
 });
 
 app.get('/', function (req, res) {
