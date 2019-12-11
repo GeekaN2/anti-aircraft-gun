@@ -2,8 +2,8 @@
 /**
  * Constants. TODO custom input
  */
-const dt = 1.6;
-const a = 0.5;
+const dt = 0.8;
+const a = 0.7;
 const len = 8; // rod length
 const lengthIntervals = 5;
 const dx = len / lengthIntervals;
