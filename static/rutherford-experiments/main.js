@@ -7,7 +7,7 @@ const canvasParams = {
     widthpx: 800, 
     heightpx: 400,
     physicalWidth: 2e-13, 
-    physicalHeight: 1.5e-13, 
+    physicalHeight: 2e-13, 
     xLines: 4, 
     yLines: 5, 
     negativeY: 0,
@@ -22,13 +22,13 @@ const static = {
 }
 
 const gold = {
-    y: 0,
+    y: 1e-13,
     x: 1e-13,
     q: 79 * static.e,
 }
 
 const particle = {
-    y: 1e-14,
+    y: 1e-14 + 1e-13,
     x: 0,
     Ux: 1e7,
     Uy: 0,
@@ -65,6 +65,13 @@ function calcPositions(particle){
 function drawGrid(canvas, canvasParams) {
     const ctx = canvas.getContext("2d");
     const cp = canvasParams;
+
+    // draw gold
+    ctx.beginPath();
+        ctx.fillStyle = "#000000";
+        ctx.arc(400, 200, 3, 0, 2 * Math.PI, true);
+        ctx.fill();
+    ctx.closePath();
 
     //ctx.clearRect(0, 0, cp.widthpx, cp.heightpx);
     ctx.font = "12px sans-serif";
@@ -129,9 +136,20 @@ function main(){
     drawGrid(canvas, canvasParams);
 
     let particleClone = particle;
-    let particleVar = [5e-15, 1e-14, 1e-14, 2e-14, 2e-14, 3e-14, 4e-14, 5e-14, 6e-14, 7e-14, 8e-14, 9e-14]; // particle.y now // actually b
+    let particleVar = [1e-14, 1e-14, 2e-14, 2e-14, 3e-14, 4e-14, 5e-14, 6e-14, 7e-14, 8e-14, 9e-14]; // particle.y now // actually b
+    
+    // particleVar = [1, 2, 3, 4, 5, 10]; // particle.q
+    // particleVar = [0.5e7, 0.7e7, 1e7, 1.5e7, 2e7, 3e7]; // particle.Ux
+    // particleVar = [200, 79, 30, 20, 10]; // gold.q
+    // particleVar = [10e-27, 8e-27, 6.642156264e-27, 6e-27, 4e-27, 2e-27]; // particle.m
+    
     for (let j = 0; j < particleVar.length; j++){
-        particleClone.y = particleVar[j];
+        particleClone.y = particleVar[j] + 1e-13;
+        // particleClone.q = particleVar[j] * static.e;
+        // particleClone.Ux = particleVar[j];
+        // gold.q = particleVar[j] * static.e;
+        // particleClone.m = particleVar[j];
+        
         const points = calcPositions(particleClone);
 
         /**
