@@ -14,6 +14,10 @@ app.get('/heat-distribution-in-the-rod', function (req, res) {
   res.sendFile(__dirname + '/static/heat-distribution-in-the-rod/index.html');
 });
 
+app.get('/heat-distribution-in-the-rod', function (req, res) {
+  res.sendFile(__dirname + '/static/rutherford-experiments/index.html');
+});
+
 app.get('/', function (req, res) {
   console.log(__dirname);
   res.sendFile(__dirname + '/static/main/index.html');

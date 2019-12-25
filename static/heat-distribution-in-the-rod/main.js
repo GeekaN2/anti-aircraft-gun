@@ -2,13 +2,22 @@
 /**
  * Constants. TODO custom input
  */
-const dt = 0.8;
+const dt = 1.2;
 const a = 0.7;
 const len = 8; // rod length
 const lengthIntervals = 5;
 const dx = len / lengthIntervals;
 const timeIntervals = 20;
 const canvas = document.querySelector('.canvas');
+
+
+var app = new Vue({
+    el: '.variables',
+    data: {
+        len: len,
+        a: 0.7
+    },
+});
 
 /**
  * Get temperature on the x-coordinate.
@@ -134,4 +143,6 @@ function main(){
         },
         actuallyWidth, actuallyWidth * 0.5, len, extremums.max, -1);
 }
+
 window.onload = main;
+

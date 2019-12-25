@@ -1,0 +1,82 @@
+@import "../reset.css";
+@import "../main.css";
+@import "../all.min.css";
+
+body {
+    font-family: var(--main-font);
+    font-size: 13px;
+}
+
+.title-name {
+    display: block;
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.actions-buttons {
+    display: flex;
+    position: absolute;
+    left: 10px;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    font-size: 1.7rem;
+    color: var(--main-color);
+    margin-right: 1.2rem;
+    height: 1.8rem;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.action-button:hover {
+    color: var(--side-color);
+}
+
+.canvas {
+    display: block;
+    border: 1px solid #000;
+    margin: 0 auto;
+}
+
+
+.variables {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 20px auto;
+    flex-wrap: wrap;
+}
+
+.variable {
+    min-width: 200px;
+    margin: 10px;
+}
+
+.variable-title {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.variable-value {
+    display: block;
+    margin: 0 auto;
+    padding: 0.2rem;
+    font-size: 1.1rem;
+    outline: none;
+    text-align: center;
+    padding: 0.2rem;
+    border: 2px solid var(--main-color);
+    border-top: none;
+    transition: 0.2s;
+}
+
+.variable-value:focus {
+    border-color: var(--side-color);
+}
+
+.designation {
+    color: var(--orange);
+}
