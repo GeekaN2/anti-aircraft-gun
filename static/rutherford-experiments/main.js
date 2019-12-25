@@ -137,7 +137,6 @@ function main(){
 
     let particleClone = particle;
     let particleVar = [1e-14, 1e-14, 2e-14, 2e-14, 3e-14, 4e-14, 5e-14, 6e-14, 7e-14, 8e-14, 9e-14]; // particle.y now // actually b
-    
     // particleVar = [1, 2, 3, 4, 5, 10]; // particle.q
     // particleVar = [0.5e7, 0.7e7, 1e7, 1.5e7, 2e7, 3e7]; // particle.Ux
     // particleVar = [200, 79, 30, 20, 10]; // gold.q
