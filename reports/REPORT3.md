@@ -57,22 +57,22 @@ draw(...args)
 ```
 
 ### Зависимость от q с +q
-![Зависимость от q с +q](static/rutherford-experiments/images/depending_on_q.png)
+![Зависимость от q с +q](../static/rutherford-experiments/images/depending_on_q.png)
 ### Зависимость от q с -q
-![Зависимость от q с -q](static/rutherford-experiments/images/depending_on_q_with_negative_q.png)
+![Зависимость от q с -q](../static/rutherford-experiments/images/depending_on_q_with_negative_q.png)
 ### Зависимость от b с +q
-![Зависимость от b с +q](static/rutherford-experiments/images/depending_on_b.png)
+![Зависимость от b с +q](../static/rutherford-experiments/images/depending_on_b.png)
 ### Зависимость от b с -q
-![Зависимость от b с -q](static/rutherford-experiments/images/depending_on_b_with_negative_q.png)
+![Зависимость от b с -q](../static/rutherford-experiments/images/depending_on_b_with_negative_q.png)
 ### Зависимость от ux с +q
-![Зависимость от ux с +q](static/rutherford-experiments/images/depending_on_ux.png)
+![Зависимость от ux с +q](../static/rutherford-experiments/images/depending_on_ux.png)
 ### Зависимость от ux с -q
-![Зависимость от ux с -q](static/rutherford-experiments/images/depending_on_ux_with_negative_q.png)
+![Зависимость от ux с -q](../static/rutherford-experiments/images/depending_on_ux_with_negative_q.png)
 ### Зависимость от Q с +q
-![Зависимость от Q с +q](static/rutherford-experiments/images/depending_on_gold_Q.png)
+![Зависимость от Q с +q](../static/rutherford-experiments/images/depending_on_gold_Q.png)
 ### Зависимость от Q с -q
-![Зависимость от Q с -q](static/rutherford-experiments/images/depending_on_gold_Q_with_negative_q.png)
+![Зависимость от Q с -q](../static/rutherford-experiments/images/depending_on_gold_Q_with_negative_q.png)
 ### Зависимость от m с +q
-![Зависимость от m с +q](static/rutherford-experiments/images/depending_on_m.png)
+![Зависимость от m с +q](../static/rutherford-experiments/images/depending_on_m.png)
 ### Зависимость от m с -q
-![Зависимость от m с -q](static/rutherford-experiments/images/depending_on_m_with_negative_q.png)
+![Зависимость от m с -q](../static/rutherford-experiments/images/depending_on_m_with_negative_q.png)
