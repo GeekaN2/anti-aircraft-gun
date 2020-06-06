@@ -1,7 +1,7 @@
 const z = 1; // порядковый номер атома
 const h = 1.05e-34; // постоянная планка
 const e = 1.6e-19; // элементарный заряд
-const a = 0.529; // градусы(?) A
+const a = 0.529; // ангстремы
 const E0 = 27.07 // эВ
 
 function factorial(n) {
@@ -27,11 +27,6 @@ function Anl(n, l) {
     (2 * z / n) ** 1.5;
 }
 
-function Alm(l, m) {
-  return Math.sqrt(factorial(l - Math.abs(m) * (2 * l + 1)) /
-    (factorial(l + Math.abs(m)) * 4 * Math.PI));
-}
-
 function Rnl(n, l, r) {
   const beta = z / n;
   const ksi = 2 * beta * r;
@@ -42,30 +37,24 @@ function Rnl(n, l, r) {
   // todo * lag
 }
 
-function Plm(l, m, teta) {
-  if (m == 0) {
-    return 1;
-  }
+function Alm(l, m) {
+  return Math.sqrt((factorial(l - Math.abs(m)) * (2 * l + 1)) /
+    (factorial(l + Math.abs(m)) * 4 * Math.PI));
+}
 
-  let x = nerdamer.diff('(x^2 - 1)^2', 'x', l+m).evaluate({x: cos(teta)}).evaluate();
-  console.log(eval(x.toString()), nerdamer.diff('(x^2 - 1)^2', 'x', l+m).toString());
-  x = eval(x.toString());
-  x = Number(x);
+function Plm(l, m, teta) {
+  let x = nerdamer.diff(`(x^2 - 1)^${l}`, 'x', l+m).evaluate({x: cos(teta)}).evaluate();
+  x = Number(x.text());
   
   return sin(teta) ** Math.abs(m) / (2 ** l * factorial(l)) * x;
 
-}
-
-function Lag(a, g, ksi) {
-  return 0;
 }
 
 function Ylm(l, m, teta) {
   let ans = {
     x: teta
   }
-
-  ans.value = Alm(l, m) * Plm(l, m, teta) * cos(teta);
+  ans.value = Alm(l, m) * Plm(l, m, teta);
   ans.value **= 2;
   return ans;
 }
@@ -93,7 +82,7 @@ function main() {
   chart.xScale().maximum(360);
   chart.container("container");
 
-  const l = 1;
+  const l = 3;
   const m = 0;
 
   console.log(`l:${l} m:${m}`);
