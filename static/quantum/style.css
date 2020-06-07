@@ -16,8 +16,8 @@ canvas {
     margin: 0 auto;
 }
 
-#container {
-    width: 800px;
-    height: 400px;
-    margin: 0 auto;
+.container {
+    width: 700px;
+    height: 350px;
+    margin: 10px auto;
 }
