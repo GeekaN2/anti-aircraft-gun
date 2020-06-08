@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/static/main/index.html');
 });
 
-app.listen(3000, function () {
-  console.log('Listen 3000 port!');
+app.listen(3001, function () {
+  console.log('Listen 3001 port!');
 });
 
