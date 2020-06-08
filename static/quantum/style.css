@@ -17,7 +17,58 @@ canvas {
 }
 
 .container {
-    width: 700px;
-    height: 350px;
+    min-height: 300px;
+    width: 450px;
     margin: 10px auto;
+    border: 1px solid #000;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+}
+
+#container_data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.data_wrapper {
+    font-size: 1.3rem;
+    margin: 10px;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.input_number {
+    padding: 3px 10px;
+    width: 5rem;
+    border: none;
+}
+
+.data_wrapper span {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    border-left: 1px solid var(--main-color);
+    padding: 0 10px;
+}
+
+.calculate_button {
+    background: #fff;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.calculate_button:hover {
+    background: var(--main-color);
+    color: #fff;
 }

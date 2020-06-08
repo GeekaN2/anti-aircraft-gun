@@ -14,20 +14,79 @@
 
 <body>
   <h2>Quantum physics</h2>
-  <div id="container_Y" class="container"></div>
-  <div id="container_R" class="container"></div>
+  <div class="wrapper">
+    <div id="container_data" class="container">
+      <div class="data_wrapper">
+        <input class="input_number" v-model.number="n">
+        <span>n</span>
+      </div>
+      <div class="data_wrapper">
+        <input class="input_number" v-model.number="l">
+        <span>l</span>
+      </div>
+      <div class="data_wrapper">
+        <input class="input_number" v-model.number="m">
+        <span>m</span>
+      </div>
+      <button class="calculate_button" v-on:click="drawCharts">Draw charts</button>
+    </div>
+    <div id="container_psi" class="container"></div>
+    <div id="container_Y" class="container"></div>
+    <div id="container_R" class="container"></div>
+    <div id="container_R2" class="container"></div>
+    <div id="container_D" class="container"></div>
+  </div>
 
 
   <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.js"></script>-->
-  <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-base.min.js" type="text/javascript"></script>
-  <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-polar.min.js"></script>
-  
+  <script src="scripts/vue.js"></script>
+
+  <script src="scripts/anychart-base.min.js" type="text/javascript"></script>
+  <script src="scripts/anychart-polar.min.js"></script>
+
   <script src="scripts/nerdamer.core.js"></script>
   <script src="scripts/Algebra.js"></script>
   <script src="scripts/Calculus.js"></script>
   <script src="scripts/Solve.js"></script>
 
   <script src="main.js"></script>
+
+  <script>
+    var vm = new Vue({
+      el: '#container_data',
+      data: {
+        n: 1,
+        l: 0,
+        m: 0,
+        chartR: {},
+        chartY: {},
+      },
+      methods: {
+        drawCharts: function () {
+          Ylm_chart(this.l, this.m, this.chartY);
+          Rnl_chart(getData(this.n, this.l), `R${this.n}${this.l}(ro)`, this.chartR);
+        }
+      },
+      created() {
+        // Set chartR options
+        this.chartR = anychart.line();
+        this.chartR.padding([10, 20, 5, 20]);
+        this.chartR.crosshair().enabled(true).yLabel(false).yStroke(null);
+        this.chartR.tooltip().positionMode('point');
+        this.chartR.yAxis().title('Rnl(ro)');
+        this.chartR.xAxis().labels().padding(5);
+        this.chartR.xScale().mode('continuous');
+        this.chartR.legend().enabled(true).fontSize(13).padding([0, 0, 10, 0]);
+        this.chartR.container('container_R');
+
+        // Set chartY options
+        this.chartY = anychart.polar();
+        this.chartY.xScale().maximum(360);
+        this.chartY.container("container_Y");
+        // chart.title(`Ylm(fi)`);
+      }
+    })
+  </script>
 </body>
 
 </html>
