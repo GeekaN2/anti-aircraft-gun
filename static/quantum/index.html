@@ -30,7 +30,7 @@
       </div>
       <button class="calculate_button" v-on:click="drawCharts">Draw charts</button>
     </div>
-    <div id="container_psi" class="container"></div>
+    <div id="container_Psi" class="container"></div>
     <div id="container_Y" class="container"></div>
     <div id="container_R" class="container"></div>
     <div id="container_R2" class="container"></div>
@@ -59,12 +59,27 @@
         l: 0,
         m: 0,
         chartR: {},
+        chartR2: {},
+        chartD: {},
         chartY: {},
+        chartPsi: {}
       },
       methods: {
         drawCharts: function () {
-          Ylm_chart(this.l, this.m, this.chartY);
-          Rnl_chart(getData(this.n, this.l), `R${this.n}${this.l}(ro)`, this.chartR);
+          if (this.l < this.n && this.n > 0 && this.m >= -this.l && this.m <= this.l) {
+            Ylm_chart(this.l, this.m, this.chartY);
+            console.log('Finish Ylm chart');
+            Rnl_chart(getDataR(this.n, this.l), `R${this.n}${this.l}(ρ)`, this.chartR);
+            console.log('Finish Rnl chart');
+            Rnl_chart(getDataR2(this.n, this.l), `|R${this.n}${this.l}(ρ)|^2`, this.chartR2);
+            console.log('Finish Rnl2 chart');
+            Rnl_chart(getDataD(this.n, this.l), `|R${this.n}${this.l}(ρ)|^2×4π×ρ^2`, this.chartD);
+            console.log('Finish D chart');
+            Psi_chart(this.n, this.l, this.m, this.chartPsi);
+            console.log('Finish Psi chart');
+          } else {
+            console.log('Please check n, l, m')
+          }
         }
       },
       created() {
@@ -73,17 +88,45 @@
         this.chartR.padding([10, 20, 5, 20]);
         this.chartR.crosshair().enabled(true).yLabel(false).yStroke(null);
         this.chartR.tooltip().positionMode('point');
-        this.chartR.yAxis().title('Rnl(ro)');
+        this.chartR.yAxis().title('Rnl(ρ)');
         this.chartR.xAxis().labels().padding(5);
         this.chartR.xScale().mode('continuous');
         this.chartR.legend().enabled(true).fontSize(13).padding([0, 0, 10, 0]);
         this.chartR.container('container_R');
 
+        this.chartR2 = anychart.line();
+        this.chartR2.padding([10, 20, 5, 20]);
+        this.chartR2.crosshair().enabled(true).yLabel(false).yStroke(null);
+        this.chartR2.tooltip().positionMode('point');
+        this.chartR2.yAxis().title('|Rnl(ρ)|^2');
+        this.chartR2.xAxis().labels().padding(5);
+        this.chartR2.xScale().mode('continuous');
+        this.chartR2.legend().enabled(true).fontSize(13).padding([0, 0, 10, 0]);
+        this.chartR2.container('container_R2');
+
+        this.chartD = anychart.line();
+        this.chartD.padding([10, 20, 5, 20]);
+        this.chartD.crosshair().enabled(true).yLabel(false).yStroke(null);
+        this.chartD.tooltip().positionMode('point');
+        this.chartD.yAxis().title('D(ρ)');
+        this.chartD.xAxis().labels().padding(5);
+        this.chartD.xScale().mode('continuous');
+        this.chartD.legend().enabled(true).fontSize(13).padding([0, 0, 10, 0]);
+        this.chartD.container('container_D');
+        
+
         // Set chartY options
         this.chartY = anychart.polar();
         this.chartY.xScale().maximum(360);
+        this.chartY.legend().enabled(true).fontSize(13).padding([0, 0, 10, 0]);
         this.chartY.container("container_Y");
         // chart.title(`Ylm(fi)`);
+        
+        this.chartPsi = anychart.polar();
+        this.chartPsi.xScale().maximum(360);
+        this.chartPsi.legend().enabled(true).fontSize(13).padding([0, 0, 10, 0]);
+        this.chartPsi.container("container_Psi");
+
       }
     })
   </script>

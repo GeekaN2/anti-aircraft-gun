@@ -6,6 +6,9 @@ const a = 0.529; // ангстрем
 const E0 = 27.07; // эВ
 const me = 9.1e-31; // масса электрона кг
 
+let R_data = [];
+let Y_data = [];
+
 /**
  * Факториал числа
  * 
@@ -71,7 +74,11 @@ function Lnl(n, l, ro) {
   return Number(Lya);
 }
 
-// Считает значения радиальной функции состояния атома
+/** 
+ * Считает значения радиальной функции состояния атома
+ * 
+ * @return {{x: number | string, value: number}}
+ */
 function Rnl(n, l, r) {
   let ans = {};
   ans.x = ro(r).toFixed(1);
@@ -99,33 +106,33 @@ function Plm(l, m, teta) {
 
 function Ylm(l, m, teta) {
   let ans = {
-    x: teta
+    x: teta,
+    value: 0
   }
+
   ans.value = Alm(l, m) * Plm(l, m, teta);
   ans.value **= 2;
   return ans;
 }
 
 function Ylm_chart(l, m, chart) {
-  let data = [];
-
   // remove last series
-  chart.removeSeriesAt(0);
+  chart.removeAllSeries();
+  Y_data = [];
 
-  for (let angle = 0; angle < 360; angle += 5) {
-    data.push(Ylm(l, m, angle));
+  for (let angle = 0; angle < 360; angle += 1) {
+    Y_data.push(Ylm(l, m, angle));
   }
-  // console.log(data);
 
-  let series = chart.line(data);
-  series.name(`Y${l}${m}(fi)`);
+  let series = chart.line(Y_data);
+  series.name(`|Y${l}${m}(θ, φ)|^2`);
 
   chart.draw();
 }
 
 function Rnl_chart(data, title, chart) {
   // delete last line
-  chart.removeSeriesAt(0);
+  chart.removeAllSeries();
 
   var series = chart.line(data);
   series.name(title);
@@ -140,11 +147,54 @@ function Rnl_chart(data, title, chart) {
   chart.draw();
 }
 
-function getData(n, l) {
-  let data = [];
-  for (r = 0; r < 10 * a; r += a / 5) {
-    data.push(Rnl(n, l, r));
+function Psi_chart(n, l, m, chart) {
+  chart.removeAllSeries();
+
+  for (let RIndex = 0; RIndex < R_data.length; RIndex += 5) {
+    let data = [];
+
+    for (let YIndex = 0; YIndex < Y_data.length; YIndex += 5) {
+      data.push({
+        x: Y_data[YIndex].x,
+        value: R_data[RIndex].value * Y_data[YIndex].value
+      });
+    }
+
+    let series = chart.line(data);
+    series.name(`ψ${n}${l}${m}(${R_data[RIndex].x}, θ, φ)`);
+  }
+
+  chart.draw();
+}
+
+function getDataR(n, l) {
+  R_data = [];
+
+  for (r = 0; r < 10 * a; r += a / 10) {
+    R_data.push(Rnl(n, l, r));
   }
   // console.log(data);
+  return R_data;
+}
+
+function getDataR2(n, l)  {
+  let data = R_data.map(elem => {
+    return {
+      x: elem.x,
+      value: elem.value ** 2
+    }
+  });
+
+  return data;
+}
+
+function getDataD(n, l) {
+  let data = R_data.map(elem => {
+    return {
+      x: elem.x,
+      value: (elem.value ** 2) * r * Math.PI * ro(elem.x) ** 2
+    }
+  });
+
   return data;
 }

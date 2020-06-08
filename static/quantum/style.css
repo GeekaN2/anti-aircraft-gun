@@ -10,17 +10,14 @@ h2 {
     margin: 1rem 0;
 }
 
-canvas {
-    display: block;
-    border: 1px solid #000;
-    margin: 0 auto;
-}
-
 .container {
     min-height: 300px;
-    width: 450px;
+    width: 500px;
     margin: 10px auto;
-    border: 1px solid #000;
+    border: 1px solid var(--side-color);
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 0 10px;
 }
 
 .wrapper {
