@@ -24,3 +24,4 @@ Choose any parameters and check the schedule.
 ### [Отчёт heat-distribution-in-the-rod](reports/REPORT2.md)
 ### [Отчёт rutherford-experiments](reports/REPORT3.md)
 ### [Отчёт spectrometer](reports/REPORT4.md)
+### [Отчёт quantum-mechanical-atom-model](reports/REPORT5.md)
