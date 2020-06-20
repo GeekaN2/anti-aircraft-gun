@@ -57,14 +57,14 @@ const eps = (n) => -E(n) / E0;
 const ro = (r) => r / a;
 const beta = (n) => Math.sqrt(2 * eps(n));
 
-// Нормировоный коэффициент для радиальной функции
+// Нормировочный коэффициент для радиальной функции
 function Anl(n, l) {
   return (1 / factorial(2 * l + 1)) *
     Math.sqrt(factorial(n + l) / (2 * n * factorial(n - l - 1))) *
     (2 * z / n) ** 1.5;
 }
 
-// Полиномы Лежандра для радиальной функции
+// Полиномы Лаггера для радиальной функции
 function Lnl(n, l, ro) {
   const ksi = 2 * beta(n) * ro;
   const gamma = n + l;
@@ -96,8 +96,9 @@ function Alm(l, m) {
     (factorial(l + Math.abs(m)) * 4 * Math.PI));
 }
 
+// Полиномы Лежандра
 function Plm(l, m, teta) {
-  let x = nerdamer.diff(`(x^2 - 1)^${l}`, 'x', l + m).evaluate({ x: cos(teta) }).evaluate();
+  let x = nerdamer.diff(`(x^2 - 1)^${l}`, 'x', l + Math.abs(m)).evaluate({ x: cos(teta) }).evaluate();
   x = Number(x.text());
 
   return sin(teta) ** Math.abs(m) / (2 ** l * factorial(l)) * x;
